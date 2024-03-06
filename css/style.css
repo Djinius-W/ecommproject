@@ -1,0 +1,49 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.header,
+.footer {
+    background-color: #005da8;
+    color: white;
+    text-align: center;
+    padding: 1em;
+}
+
+.row {
+    display: flex;
+}
+
+.column {
+    flex: 1;
+    padding: 15px;
+}
+
+.card {
+    background-color: #b2bac2bb;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.full-height {
+    height: 100vh;
+    /* Adjust height as needed */
+}
+
+.nav,
+.cart,
+.details {
+    height: 300px;
+    /* Adjust height as needed */
+}
+
+.image-card {
+    height: 200px;
+    /* Adjust height as needed */
+}

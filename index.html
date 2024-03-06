@@ -1,0 +1,116 @@
+<!DOCTYPE html lang="fr">
+<html> 
+   <head> 
+		<title>E-comm Lab</title>
+		<meta charset="utf-8">
+		
+		<!-- development version, includes helpful console warnings -->
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<link rel="stylesheet" href="./css/style.css"> 
+	</head>
+
+<body>
+<!--
+	<body style = "background-color: antiquewhite;">
+		<main>
+			<h1>Bienvenue </h1>
+			<div id="app">
+                <div id="panier"  v-if="showPanier">
+                    <addToCart @added ="    updateQuantity(item)" :key= "$index"/>
+                    <cartSummary />
+                </div>
+                <productList @clicked ="setActiveProduct($event)"/>
+            </div>
+                
+                </div>
+                <div id="images">
+                    <figure>
+                        <img :src="">
+                        
+                    </figure>
+
+                </div>
+                <div id="params">
+                
+                </div>
+	        </div>
+     -->      
+     <div id="app" class="container">
+
+        <div class="header">
+          <p>{{ selectedItem.name }}</p>
+        </div>
+      
+        <div class="row full-height">
+          <!-- Colonne des variantes -->
+          <div class="column">
+            <div class="card" v-for="variante in item.variantes" :key="variante.id" @click="selectVariante(variante)">
+              {{ variante.color }} - {{ variante.quantity }} en stock
+              <button @click.stop="addToCart(variante)">Ajouter au panier</button>
+            </div>
+          </div>
+      
+          <!-- Colonne de l'image et de la description -->
+          <div class="column">
+            <div class="card nav" v-for="variante in item.variantes" :key="variante.id">
+              <img :src="variante.image" :alt="'Image de ' + variante.color">
+            </div>
+            <div class="card details">
+              {{selectedItem.description }}
+            </div>
+          </div>
+      
+          <!-- Colonne du panier -->
+          <div class="column">
+            <div class="card cart">
+              <div v-for="cartItem in cart.items" :key="cartItem.id">
+                {{ cartItem.name }} - Quantité: {{ cartItem.quantity }}
+              </div>
+            </div>
+            <div class="card">Total Quantité: {{ cart.totalQuantity }} </div>
+            <div class="card">Prix Total: {{ cart.totalPrice }} $</div>
+            <div class="card">Panier</div>
+            <div class="card">
+              <button @click="resetCart">Reset Panier</button>
+            </div>
+            <div class="card" v-show="cart.isPremium">premium member!</div>
+          </div>
+        </div>      
+      </div>
+
+    
+<!--
+<div class="header">
+    <p>Les Cravattes en folies !</p>
+  </div>
+  
+  <div class="row full-height">
+    <div class="column">
+      <div class="card">Param (dispo + couleur)</div>
+    </div>
+    <div class="column">
+      <div class="card nav">Image</div>
+      <div class="card details">Item (image description)</div>
+      <div class="card">Description...</div>
+    </div>
+    <div class="column">
+      <div class="card basket">Liste d'item dans panier</div>
+      <div class="card">Prix total</div>
+      <div class="card">Panier</div>
+      <div class="card"><button @:click="reset">Reset</button>{{quantite}}</div>
+      <div class="card">Premium ?</div>
+    </div>
+  </div>
+-->
+
+
+
+
+
+        </main>
+        <footer class="footer">
+            <p>&copy; 2024 Klein Kelvin</p>
+        </footer>   
+		<script src="index.js"></script>
+	</body>
+</html>
