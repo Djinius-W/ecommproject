@@ -1,7 +1,8 @@
 let app = new Vue({
-    el: '#app', // Lie l'instance Vue à l'élément avec l'ID "app" dans le HTML
+    el: '#app', 
     data: {
         produits: {
+            id : 1,
             nom: 'cravates',
             modeles: [
                 {
@@ -81,8 +82,6 @@ let app = new Vue({
             });
             this.panier.articles = [];
             this.mettreAJourTotalPanier();
-        },
-
-
+        }
     }
 });
