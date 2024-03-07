@@ -1,109 +1,88 @@
 let app = new Vue({
-    el: '#app',
+    el: '#app', // Lie l'instance Vue à l'élément avec l'ID "app" dans le HTML
     data: {
-        selectedItem: null,
-        item:
-        {
-            id: 1,
-            name: 'cravate ' + this.color,
-            description: "Une cravate " + this.color + " en soie ultra classe pour les soirées.",
-            variantes: [
+        produits: {
+            nom: 'cravates',
+            modeles: [
                 {
                     id: 1,
-                    color: "rouge",
-                    quantity: 20,
-                    price: 30,
-                    image: '/images/cravate_rouge.jpg'
+                    nom: 'Cravate bleue',
+                    description: "La cravate classique passe partout.",
+                    prix: 52,
+                    image: 'img/cravate_bleue.png',
+                    stock: 4
                 },
+
                 {
                     id: 2,
-                    color: "bleue",
-                    quantity: 1,
-                    price: 33,
-                    image: '/images/cravate_bleue.jpg'
+                    nom: 'Cravate bleue nuit',
+                    description: "Idéale pour accompagner vos plus beaux costumes.",
+                    prix: 55,
+                    image: 'img/cravate_bleuenuit.png',
+                    stock: 5
                 },
+
                 {
                     id: 3,
-                    color: "verte",
-                    quantity: 18,
-                    price: 34,
-                    image: '/images/cravate_verte.jpg'
+                    nom: 'Cravate rouge',
+                    description: "Une cravate pour la personne qui aime se faire remarquer.",
+                    prix: 51,
+                    image: 'img/cravate_rouge.png',
+                    stock: 6
                 },
+
                 {
                     id: 4,
-                    color: "bleue nuit",
-                    quantity: 3,
-                    price: 35,
-                    image: '/images/cravate_bleuenuit.jpg'
+                    nom: 'Cravate turquoise',
+                    description: "Pour la personne qui a de l'audace.",
+                    prix: 49,
+                    image: 'img/cravate_verte.png',
+                    stock: 4
                 },
             ],
-            
-
+            modeleSelectionne: 0
         },
-
-        cart:
-        {
-            items: [],
-            totalQuantity: 0,
-            totalPrice: 0,
-            isPremium : false
+        panier: {
+            articles: [],
+            total: 0
         }
     },
-
-
     computed: {
-        productsFiltered() {
-            return this.products.filter(product => product.quantity > 0)
+        varianteSelectionnee() {
+            return this.produits.modeles[this.produits.modeleSelectionne];
+        },
+        estPremium() {
+            return this.panier.total >= 300;
         }
-
     },
-
     methods: {
-
-        addToCart(item) {
-            let index = this.cart.items.findIndex(i => i.id === item.id);
-            this.cart.items[index].push(item);
-            this.cart.totalQuantity++;
-            this.cart.totalPrice += item.price;
-            if (this.selectedItem == item.id) {
-                this.variante.quantity--;
-            }
-            if (totalPrice >= 300){
-                this.becomePremium();
-                alert('You are now a premium member!')
-            }
-
-        },
-            
-        
-        becomePremium(){
-            cart.isPremium=true;
-        },
-
-        resetCart(index) {
-            if (this.selectedItem == index) {
-                this.selectedItem = null;
-
-            
-            } else {
-                this.selectedItem = index;
-            }
-
-        },
-
-        removeFromCart(item) {
-            let index = this.cart.items.indexOf(item);
-            Vue.delete(this.cart.items, index);
-            totalQuantity -= item.quantity;
-            totalPrice -= item.quantity * item.price;
-            if (totalQuantity <= 0) {
-                alert("Your cart is empty!");
-                window.location.reload();
+        ajouterAuPanier() {
+            let variante = this.varianteSelectionnee;
+            if (variante.stock > 0) {
+                let articlePanier = this.panier.articles.find(article => article.id === variante.id);
+                if (articlePanier) {
+                    articlePanier.quantite++;
+                } else {
+                    this.panier.articles.push({ ...variante, quantite: 1 });
+                }
+                this.mettreAJourTotalPanier();
+                variante.stock--;
             }
         },
-
-        selectVariante(variante) {
-            this.selectedItem = variante;
+        mettreAJourTotalPanier() {
+            this.panier.total = this.panier.articles.reduce((total, article) => total + (article.prix * article.quantite), 0);
         },
+        viderPanier() {
+            this.panier.articles.forEach(article => {
+                let variante = this.produits.modeles.find(variante => variante.id === article.id);
+                if (variante) {
+                    variante.stock += article.quantite;
+                }
+            });
+            this.panier.articles = [];
+            this.mettreAJourTotalPanier();
+        },
+
+
     }
-})
+});
