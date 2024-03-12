@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-md-8">
                 <div v-if="varianteSelectionnee">
-                    <h2>{{ varianteSelectionnee.nom }}</h2>
+                    <h2>{{produits.nom}} {{ varianteSelectionnee.couleur }}</h2>
                     <img :src="varianteSelectionnee.image" :alt="varianteSelectionnee.nom" class="img-fluid">
                     <h5>{{ varianteSelectionnee.description }}</h5>
                     <p>Voici les variantes disponibles : </p>

@@ -3,11 +3,11 @@ let app = new Vue({
     data: {
         produits: {
             id : 1,
-            nom: 'cravates',
+            nom: 'Cravate',
             modeles: [
                 {
                     id: 1,
-                    nom: 'Cravate bleue',
+                    couleur: 'bleue',
                     description: "La cravate classique passe partout.",
                     prix: 52,
                     image: 'img/cravate_bleue.png',
@@ -16,7 +16,7 @@ let app = new Vue({
 
                 {
                     id: 2,
-                    nom: 'Cravate bleue nuit',
+                    couleur: 'bleue nuit',
                     description: "Idéale pour accompagner vos plus beaux costumes.",
                     prix: 55,
                     image: 'img/cravate_bleuenuit.png',
@@ -25,7 +25,7 @@ let app = new Vue({
 
                 {
                     id: 3,
-                    nom: 'Cravate rouge',
+                    couleur: 'rouge',
                     description: "Une cravate pour la personne qui aime se faire remarquer.",
                     prix: 51,
                     image: 'img/cravate_rouge.png',
@@ -34,7 +34,7 @@ let app = new Vue({
 
                 {
                     id: 4,
-                    nom: 'Cravate turquoise',
+                    couleur: 'turquoise',
                     description: "Pour la personne qui a de l'audace.",
                     prix: 49,
                     image: 'img/cravate_verte.png',
